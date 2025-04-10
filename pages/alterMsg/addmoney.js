@@ -13,7 +13,7 @@ Page({
   },
   tomoney(e) {
     wx.navigateTo({
-      url: './addmoney',
+      url: '../addmoney/addmoney',
     })
   },
   PickerChange(e) {
@@ -39,41 +39,35 @@ Page({
       title: '正在修改',
     })
 
-    console.log(e)
     var form = e.detail.value
-
-
-
-    if (this.data.index == "1") {
-      var gender = "女"
-    } else {
-      var gender = "男"
-    }
+    console.log(form.add)
     var userid = this.data.res._id
     var date = this.data.date
-    db.collection('user').doc(userid).update({
-      data: {
-        gender: gender,
-        brithday: date,
-        age: form.age,
-        name: form.name,
-        phone: form.phone,
-        username: form.username,
-        password: form.password,
-        pos: form.pos
+    wx.showModal({
+      title: '提示',
+      content: '是否要进行充值',
+      complete: (res) => {
+        if (res.cancel) {
+          wx.hideLoading()
+        }
+
+        if (res.confirm) {
+          db.collection('user').doc(userid).update({
+            data: {
+              money: parseInt(this.data.res.money || 0) + parseInt(form.add)
+            }
+          }).then(res => {
+            // 写缓存 
+            wx.showToast({
+              title: '充值成功',
+              icon: 'none'
+            })
+            wx.navigateBack({
+              delta: "1"
+            })
+          })
+        }
       }
-    }).then(res => {
-      // 写缓存 
-      wx.showToast({
-        title: '修改成功',
-        icon: 'none'
-      })
-      wx.clearStorage()
-      setTimeout(() => {
-        wx.switchTab({
-          url: '../server/server',
-        })
-      }, 1000);
     })
 
   },
@@ -81,14 +75,11 @@ Page({
     wx.showLoading({
       title: '正在加载',
     })
-    var res = wx.getStorageSync('loginmsg')
     var id = wx.getStorageSync('loginmsg')._id
     db.collection("user").doc(id).get().then(res => {
       wx.hideLoading()
       this.setData({
         res: res.data,
-        date: res.data.brithday,
-        index: res.data.gender == '男' ? '0' : '1'
       })
     })
 

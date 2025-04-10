@@ -1,0 +1,16 @@
+<form action="" bindsubmit="submit">
+  <view class="cu-form-group">
+    <view class="title">充值金额：</view>
+    <input placeholder='填写充值金额' name='add'></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">余额</view>
+    <input placeholder='' value="{{res.money||0}}" disabled="{{true}}" name='pos'></input>
+  </view>
+  
+
+  <view class="padding flex flex-direction">
+    <button class="cu-btn bg-green margin-tb-sm lg" form-type="submit">充值</button>
+
+  </view>
+</form>

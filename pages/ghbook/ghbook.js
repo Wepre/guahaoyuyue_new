@@ -30,24 +30,17 @@ Page({
     wx.showLoading({
       title: '正在加载',
     })
-    db.collection('pztimeList').get().then(res => {
-      console.log(res)
-      this.setData({
-        timeList: res.data,
-        
-      })
-    })
     wx.cloud.callFunction({
       name: "getghremainnum",
       data: {
         doctorid: this.data.docid,
-        date:this.data.date,
-        maxNum:this.data.maxNum,
+        date: this.data.date,
+        maxNum: this.data.maxNum,
       }
     }).then(res => {
       console.log(res)
       this.setData({
-        timeList:res.result
+        timeList: res.result
       })
       wx.hideLoading()
 
@@ -81,58 +74,7 @@ Page({
       maxNum: maxNum,
       docid: docid
     })
-    wx.cloud.callFunction({
-      name: 'getghbynum',
-      data: {
-        bookdate: this.data.date,
-        timenum: "1",
-        doctor: docid
-      }
-    }).then(res => {
-      console.log(res.result.data.length)
-      this.setData({
-        remain1: res.result.data.length
-      })
-    })
-    wx.cloud.callFunction({
-      name: 'getghbynum',
-      data: {
-        bookdate: this.data.date,
-        timenum: "2",
-        doctor: docid
-      }
-    }).then(res => {
-      console.log(res.result.data.length)
-      this.setData({
-        remain2: res.result.data.length
-      })
-    })
-    wx.cloud.callFunction({
-      name: 'getghbynum',
-      data: {
-        bookdate: this.data.date,
-        timenum: "3",
-        doctor: docid
-      }
-    }).then(res => {
-      console.log(res.result.data.length)
-      this.setData({
-        remain3: res.result.data.length
-      })
-    })
-    wx.cloud.callFunction({
-      name: 'getghbynum',
-      data: {
-        bookdate: this.data.date,
-        timenum: "4",
-        doctor: docid
-      }
-    }).then(res => {
-      console.log(res.result.data.length)
-      this.setData({
-        remain4: res.result.data.length
-      })
-    })
+   
   },
   verify(timenum) {
     if (timenum == '1') {
@@ -164,9 +106,7 @@ Page({
   book() {
     //预约开始
     //一，验证一下是不是有足够多的剩余位
-    var timenum = this.data.radio
-    var isfull = this.verify(timenum)
-    if (!isfull) {
+    if (this.data.timeList[this.data.radio].count==0) {
       wx.showToast({
         title: '该时间段不可约，请重新选择！',
         icon: "none"
@@ -187,7 +127,7 @@ Page({
         ghdoctorname: this.data.doctor,
         ispay: false,
         price: this.data.doctorinfo.price,
-        time: this.data.clickTime||"08:00~9:00"
+        time: this.data.clickTime || "08:00~9:00"
       }
     }).then(res => {
       wx.hideLoading()

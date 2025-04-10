@@ -14,6 +14,7 @@
         "pages/search/search",
         "pages/selectServer/selectServer",
         "pages/alterMsg/alterMsg",
+        "pages/alterMsg/addmoney",
         "pages/mycomment/mycomment",
         "pages/serverdetail/serverdetail",
         "pages/mine/mine"
