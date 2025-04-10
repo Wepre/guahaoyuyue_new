@@ -23,7 +23,7 @@
     <van-cell title="科室：" value="{{res.keshi}}" />
     <van-cell title="医生：" value="{{res.ghdoctorname}}" />
     <van-cell title="日期：" value="{{res.bookdate}}" />
-    <van-cell title="时间：" value="{{trans.test(res.timenum)}}" />
+    <van-cell title="时间：" value="{{res.time}}" />
 </van-cell-group>
 <van-submit-bar
   price="{{ res.price*100 }}" 

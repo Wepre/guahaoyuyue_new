@@ -14,7 +14,7 @@
 </view>
 <view class="cells">
   <van-cell-group inset border>
-    <van-cell title="修改个人信息" bindtap="alter" icon="add" value="修改个人信息" is-link border />
+    <van-cell title="个人信息" bindtap="alter" icon="add" value="修改个人信息" is-link border />
     <van-cell  title="挂号记录" bindtap="myguahao" icon="phone-circle" value="查看挂号记录" is-link border />
     <van-cell  title="缴费记录" bindtap="jf" icon="phone-circle" value="查看缴费记录" is-link border />
     <van-cell  title="我的病例" bindtap="bl" icon="phone-circle" value="查看病例" is-link border />

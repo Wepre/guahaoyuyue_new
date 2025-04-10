@@ -31,7 +31,7 @@
 	</view>
 	<view class="cu-form-group ">
 		<view class="title">时间:</view>
-		<input disabled="{{true}}" value="{{trans.test(item.timenum)}}"></input>
+		<input disabled="{{true}}" value="{{item.time}}"></input>
 	</view>
 	<view class="cu-form-group ">
 		<view class="title text-red">费用:</view>
